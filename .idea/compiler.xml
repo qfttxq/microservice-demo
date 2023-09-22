@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="goodService" />
+        <module name="common-beans" />
+        <module name="gatewayService" />
+        <module name="payService" />
+        <module name="orderService" />
+        <module name="warehouseService" />
+        <module name="dubbo-api" />
+        <module name="userService" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common-beans" options="-parameters" />
+      <module name="dubbo-api" options="-parameters" />
+      <module name="gatewayService" options="-parameters" />
+      <module name="goodService" options="-parameters" />
+      <module name="orderService" options="-parameters" />
+      <module name="payService" options="-parameters" />
+      <module name="userService" options="-parameters" />
+      <module name="warehouseService" options="-parameters" />
+    </option>
+  </component>
+</project>

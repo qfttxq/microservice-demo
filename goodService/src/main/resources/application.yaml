@@ -1,0 +1,47 @@
+spring:
+  shardingsphere:
+    mode:
+      type: Memory
+    datasource:
+      names: md0,md1,md2
+      md0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+        password: 123456
+        jdbc-url: jdbc:mysql://192.168.107.128:3306/md0?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+      md1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+        password: 123456
+        jdbc-url: jdbc:mysql://192.168.107.128:3306/md1?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+      md2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        username: root
+        password: 123456
+        jdbc-url: jdbc:mysql://192.168.107.128:3306/md2?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
+    rules:
+      sharding:
+        tables:
+          t_good:
+            actual-data-nodes: md$->{0..2}.t_good
+            database-strategy:
+              standard:
+                sharding-column: id
+                sharding-algorithm-name: t-good-databases-inline
+        binding-tables: t_good
+        sharding-algorithms:
+          t-good-databases-inline:
+            type: INLINE
+            props:
+              algorithm-expression: md$->{id % 3}
+    props:
+      sql-show: true
+
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
