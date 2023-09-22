@@ -109,6 +109,25 @@ public class UserServiceV3 extends ServiceImpl<UserMapper, User> implements User
         return matches;
     }
 
+    @Override
+    public User validate(String userName, String password) {
+
+        boolean matches = false;
+        try {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            QueryWrapper<User> wrapper = new QueryWrapper<>();
+            wrapper.eq("user_name",userName);
+            User user = getOne(wrapper);
+            String pw = user.getPassword();
+            matches = passwordEncoder.matches(password, pw);
+            if(matches){
+                return user;
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(),e);
+        }
+        return null;
+    }
 
 
 }
