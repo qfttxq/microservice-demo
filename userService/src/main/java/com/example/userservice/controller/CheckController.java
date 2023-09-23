@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,11 +27,14 @@ public class CheckController {
     private HttpServletResponse response;
     @Autowired
     private ObjectMapper objectMapper;
+    @Value("${spring.session.timeout}")
+    private Integer timeout;
 
     @RequestMapping("login")
     public Result login(String userName, String password) {
         User user = userService.validate(userName, password);
         HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(timeout);
         String userJson = null;
         try {
             userJson = objectMapper.writeValueAsString(user);

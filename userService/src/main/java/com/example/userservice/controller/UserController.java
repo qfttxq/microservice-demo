@@ -4,17 +4,20 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.comonbeans.common.Result;
 import com.example.comonbeans.entity.user.User;
 import com.example.userservice.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
+@Slf4j
 @RestController
 public class UserController implements ApplicationContextAware {
     @Autowired
@@ -23,9 +26,14 @@ public class UserController implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
+    @Autowired
+    private HttpServletRequest request;
+
     @RequestMapping("list")
     public Result list() {
         List<User> list = userService.list();
+        Object user = request.getSession().getAttribute("user");
+        log.info("user:{}",user);
         return Result.build(200, "操作成功", list);
     }
 

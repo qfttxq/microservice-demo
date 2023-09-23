@@ -63,8 +63,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
             log.error(e.getMessage(), e);
         }
 
-        String id = (String) redisTemplate.opsForValue().get("user:id");
-        log.info("id:{}", id);
+
         //进行token验证
         String accessToken = request.getHeaders().getFirst(ACCESS_TOKEN);
         Result result = JwtUtils.verify2(accessToken);

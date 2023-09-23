@@ -13,6 +13,8 @@ spring:
     url: jdbc:mysql://192.168.107.129:3306/md?serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8
   application:
     name: userService
+  session:
+    timeout: 120
 
 
 dubbo:
