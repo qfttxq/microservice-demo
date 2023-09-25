@@ -38,9 +38,10 @@ public class CheckController {
         String userJson = null;
         try {
             userJson = objectMapper.writeValueAsString(user);
+            log.info("userJson:{}",userJson);
             session.setAttribute("user", userJson);
         } catch (JsonProcessingException e) {
-            log.info(e.getMessage(), e);
+            log.error(e.getMessage(),e);
         }
 
         if (user == null) {

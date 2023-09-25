@@ -14,7 +14,7 @@ spring:
   application:
     name: userService
   session:
-    timeout: 120
+    timeout: 1800
 
 
 dubbo:

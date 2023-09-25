@@ -32,8 +32,7 @@ public class UserController implements ApplicationContextAware {
     @RequestMapping("list")
     public Result list() {
         List<User> list = userService.list();
-        Object user = request.getSession().getAttribute("user");
-        log.info("user:{}",user);
+        log.info("list:{}",list);
         return Result.build(200, "操作成功", list);
     }
 
