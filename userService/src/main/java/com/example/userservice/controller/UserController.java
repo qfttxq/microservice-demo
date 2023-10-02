@@ -4,19 +4,20 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.comonbeans.common.Result;
 import com.example.comonbeans.entity.user.User;
 import com.example.userservice.service.UserService;
+import com.sun.xml.internal.ws.util.CompletedFuture;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+
 @Slf4j
 @RestController
 public class UserController implements ApplicationContextAware {
@@ -32,7 +33,8 @@ public class UserController implements ApplicationContextAware {
     @RequestMapping("list")
     public Result list() {
         List<User> list = userService.list();
-        log.info("list:{}",list);
+        log.info("list:{}", list);
+
         return Result.build(200, "操作成功", list);
     }
 
@@ -67,10 +69,15 @@ public class UserController implements ApplicationContextAware {
         return Result.build(200, "操作成功", page);
     }
 
-    @RequestMapping("placeAnOrder")
-    public Result placeAnOrder() throws Exception {
-        userService.placeAnOrder();
-        return Result.build(200);
+        @RequestMapping("placeAnOrder")
+    public Result placeAnOrder() {
+            try {
+                userService.placeAnOrder();
+            } catch (Exception e) {
+                log.error(e.getMessage(),e);
+                return Result.build(500,"服务器错误");
+            }
+            return Result.build(200);
     }
 
     @Override

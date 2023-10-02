@@ -6,6 +6,9 @@ spring:
       config:
         server-addr: 192.168.107.129:8848
         file-extension: yaml
+        shared-configs:
+          - data-id: shared.yaml
+            refresh: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
@@ -31,3 +34,9 @@ dubbo:
   consumer:
     check: false
     timeout: 3000
+rocketmq:
+  producer:
+    group: user-pg
+mybatis-plus:
+  global-config:
+    worker-id: 23

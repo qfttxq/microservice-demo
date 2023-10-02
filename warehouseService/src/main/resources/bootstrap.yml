@@ -24,19 +24,19 @@ dubbo:
     name: warehouseService
   scan:
     base-packages: com.example.warehouseservice.service
-seata:
-  registry:
-    type: nacos
-    nacos:
-      server-addr: 192.168.107.129:8848
-      namespace: 82297c7c-2d72-4d60-9d8f-f9347fc3ee94
-      group: SEATA_GROUP
-  tx-service-group: default_tx_group
-  config:
-    type: nacos
-    nacos:
-      server-addr: 192.168.107.129:8848
-      namespace: 82297c7c-2d72-4d60-9d8f-f9347fc3ee94
-      group: SEATA_GROUP
-      data-id: seataServer.properties
-  data-source-proxy-mode: XA
+#seata:
+#  registry:
+#    type: nacos
+#    nacos:
+#      server-addr: 192.168.107.129:8848
+#      namespace: 82297c7c-2d72-4d60-9d8f-f9347fc3ee94
+#      group: SEATA_GROUP
+#  tx-service-group: default_tx_group
+#  config:
+#    type: nacos
+#    nacos:
+#      server-addr: 192.168.107.129:8848
+#      namespace: 82297c7c-2d72-4d60-9d8f-f9347fc3ee94
+#      group: SEATA_GROUP
+#      data-id: seataServer.properties
+#  data-source-proxy-mode: XA
